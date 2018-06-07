@@ -33,7 +33,7 @@ pipeline {
     stage('Checkpoint') {
       agent none
       steps {
-        checkpont 'Checkpoint'
+        checkpoint 'Checkpoint'
       }
     }
     stage('Get Kernel') {
