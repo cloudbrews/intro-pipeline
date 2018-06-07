@@ -34,4 +34,9 @@ pipeline {
   parameters {
     string(name: 'Name', defaultValue: 'whoever you are', description: 'To whom should Sir Jenkins say hello?')
   }
+  post {
+    aborted {
+      echo "Why didn't you push my f***ing button bro?"
+    }
+  }
 }
