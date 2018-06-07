@@ -30,6 +30,12 @@ pipeline {
         }
       }
     }
+    stage('Checkpoint') {
+      agent none
+      steps {
+        checkpont 'Checkpoint'
+      }
+    }
     stage('Get Kernel') {
       steps {
         script {
