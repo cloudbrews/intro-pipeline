@@ -11,19 +11,21 @@ pipeline {
         echo "Test user password: ${TEST_USER_PSW}"
       }
     }
-    stage('Deploy') {
-      options {
-        timeout(time: 30, unit: 'SECONDS')
-      }
-      input {
-        message "Which version?"
-        ok "Deploy"
-        parameters {
-            choice(name: 'APP_VERSION', choices: "v1.1\nv1.2\nv1.3", description: 'What to deploy?')
+    stage('Get Kernel') {
+      steps {
+        script {
+          try {
+            KERNEL_VERSION = sh (script: "uname -r", returnStdout: true)
+          } catch(err) {
+            echo "CAUGHT ERROR: ${err}"
+            throw err
+          }
         }
       }
+    }
+    stage('Say Kernel') {
       steps {
-        echo "Deploying ${APP_VERSION}."
+        echo "${KERNEL_VERSION}"
       }
     }
   }
@@ -36,7 +38,7 @@ pipeline {
   }
   post {
     aborted {
-      echo "Why didn't you push my f***ing button bro?"
+      echo "Why didn't you push my button?"
     }
   }
 }
